@@ -33,7 +33,10 @@
             <Image
                 Width="16"
                 Height="16"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
                 Source="pack://application:,,,/Resources/close.png" />
+            
         </DataTemplate>
     </Window.Resources>
 
@@ -54,15 +57,15 @@
 
         <!--  ToolBar for Filtering  -->
         <ToolBar
-            ToolBarTray.IsLocked="True"
             Name="tb"
             Grid.Row="0"
             Margin="5"
             HorizontalAlignment="Stretch"
             Band="0"
-            BandIndex="0">
-
-            <Grid>
+            BandIndex="0"
+            SizeChanged="ToolBar_SizeChanged"
+            ToolBarTray.IsLocked="True">
+            <Grid Name="toolBarGrid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
@@ -71,10 +74,12 @@
                     Name="filterText"
                     Grid.Column="0"
                     Margin="5,0,0,0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    HorizontalContentAlignment="Left"
+                    VerticalAlignment="Stretch"
                     Style="{StaticResource FilterTextBoxStyle}"
                     Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
+                    TextChanged="FilterText_TextChanged"
                     ToolTip="Filter" />
                 <Button
                     Name="dismissButton"
@@ -123,7 +128,7 @@
                 Margin="5,0,0,0"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
-                DockPanel.Dock="Left"                
+                DockPanel.Dock="Left"
                 Style="{StaticResource FilterTextBoxStyle}"
                 Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
                 ToolTip="Filter" />
@@ -137,7 +142,6 @@
                 ToolTip="Clear Filter"
                 Visibility="{Binding FilterText, Converter={StaticResource EmptyStringToVisibilityConverter}}" />
         </DockPanel>
-
 
         <!--  SatckPanel for Filtering  -->
         <StackPanel
@@ -160,14 +164,7 @@
                 DockPanel.Dock="Right"
                 ToolTip="Clear Filter"
                 Visibility="{Binding FilterText, Converter={StaticResource EmptyStringToVisibilityConverter}}" />
-
         </StackPanel>
-
-
-
-
-
-
 
     </Grid>
 </Window>
