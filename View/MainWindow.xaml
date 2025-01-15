@@ -121,14 +121,13 @@
 
         <!--  DockPanel for Filtering  -->
         <DockPanel
-            Grid.Row="2"
+            Grid.Row="2"            
             HorizontalAlignment="Stretch"
             LastChildFill="True">
             <TextBox
                 Margin="5,0,0,0"
-                HorizontalAlignment="Stretch"
+                HorizontalAlignment="Left"
                 VerticalAlignment="Stretch"
-                DockPanel.Dock="Left"
                 Style="{StaticResource FilterTextBoxStyle}"
                 Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
                 ToolTip="Filter" />
@@ -136,9 +135,9 @@
                 Width="16"
                 Height="16"
                 VerticalAlignment="Stretch"
+                HorizontalAlignment="Left"
                 Command="{Binding ClearFilterCommand}"
                 ContentTemplate="{StaticResource closeIcon8}"
-                DockPanel.Dock="Right"
                 ToolTip="Clear Filter"
                 Visibility="{Binding FilterText, Converter={StaticResource EmptyStringToVisibilityConverter}}" />
         </DockPanel>

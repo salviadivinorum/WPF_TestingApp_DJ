@@ -16,12 +16,12 @@ namespace WPF_TestingApp_DJ
 
         private void ToolBar_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            AdjustFilterTextWidth();
+            // AdjustFilterTextWidth();
         }
 
         private void FilterText_TextChanged(object sender, TextChangedEventArgs e)
         {
-            AdjustFilterTextWidth();
+            // AdjustFilterTextWidth();
         }
 
         private void AdjustFilterTextWidth()
