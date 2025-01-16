@@ -1,0 +1,40 @@
+﻿<Window
+    x:Class="WPF_TestingApp_DJ.View.SceneTreeWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WPF_TestingApp_DJ.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="SceneTreeWindow"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <local:SceneTreeToolBar
+            Grid.Row="0"
+            Grid.Column="0"
+            HorizontalAlignment="Stretch" />
+
+        <!--<GridSplitter
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            Width="8"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Stretch"
+            Background="Gray"
+            ResizeBehavior="PreviousAndCurrent"
+            ResizeDirection="Columns" />-->
+    </Grid>
+</Window>
