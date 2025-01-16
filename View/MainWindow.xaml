@@ -16,17 +16,9 @@
         <model:EmptyStringToVisibilityConverter x:Key="EmptyStringToVisibilityConverter" />
 
         <Style x:Key="FilterTextBoxStyle" TargetType="TextBox">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="2" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Width" Value="auto" />
-            <Setter Property="TextAlignment" Value="Center" />
-        </Style>
-
-        <Style x:Key="CenterCell" TargetType="{x:Type TextBlock}">
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="TextAlignment" Value="Left" />
         </Style>
 
         <DataTemplate x:Key="closeIcon8">
@@ -36,7 +28,7 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Source="pack://application:,,,/Resources/close.png" />
-            
+
         </DataTemplate>
     </Window.Resources>
 
@@ -50,6 +42,8 @@
             <RowDefinition Height="20" />
             <RowDefinition Height="20" />
             <RowDefinition Height="20" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -75,8 +69,8 @@
                     Grid.Column="0"
                     Margin="5,0,0,0"
                     HorizontalAlignment="Left"
-                    HorizontalContentAlignment="Left"
                     VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Left"
                     Style="{StaticResource FilterTextBoxStyle}"
                     Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
                     TextChanged="FilterText_TextChanged"
@@ -94,6 +88,8 @@
                     Visibility="{Binding FilterText, Converter={StaticResource EmptyStringToVisibilityConverter}}" />
             </Grid>
         </ToolBar>
+
+
 
         <!--  Grid for Filtering  -->
         <Grid Name="testingGrid" Grid.Row="1">
@@ -121,7 +117,7 @@
 
         <!--  DockPanel for Filtering  -->
         <DockPanel
-            Grid.Row="2"            
+            Grid.Row="2"
             HorizontalAlignment="Stretch"
             LastChildFill="True">
             <TextBox
@@ -134,8 +130,8 @@
             <Button
                 Width="16"
                 Height="16"
-                VerticalAlignment="Stretch"
                 HorizontalAlignment="Left"
+                VerticalAlignment="Stretch"
                 Command="{Binding ClearFilterCommand}"
                 ContentTemplate="{StaticResource closeIcon8}"
                 ToolTip="Clear Filter"
@@ -164,6 +160,51 @@
                 ToolTip="Clear Filter"
                 Visibility="{Binding FilterText, Converter={StaticResource EmptyStringToVisibilityConverter}}" />
         </StackPanel>
+
+        <!--  Another ToolBar attempt  -->
+        <ToolBar Grid.Row="4">
+            <ToolBar.Items>
+                <Button Content="1" />
+                <Button Content="2" />
+                <Button Content="3" />
+                <DockPanel LastChildFill="True" HorizontalAlignment="Stretch">
+                    <Button
+                        Command="{Binding ClearFilterCommand}"
+                        Content="X"
+                        DockPanel.Dock="Right"
+                        Visibility="{Binding IsVisible}" />
+                    <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+            </ToolBar.Items>
+        </ToolBar>
+
+        <!--  Have ToolBar separate from Filter control  -->
+        <DockPanel Grid.Row="5">
+            <ToolBar DockPanel.Dock="Left">
+                <ToolBar.Items>
+                    <Button Content="1" />
+                    <Button Content="2" />
+                    <Button Content="3" />
+                </ToolBar.Items>
+            </ToolBar>
+            <DockPanel>
+                <!--  Need to have Button first !  -->
+                <Button
+                    Width="16"
+                    Height="16"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Stretch"
+                    Command="{Binding ClearFilterCommand}"
+                    ContentTemplate="{StaticResource closeIcon8}"
+                    DockPanel.Dock="Right"
+                    ToolTip="Clear Filter"
+                    Visibility="{Binding FilterText, Converter={StaticResource EmptyStringToVisibilityConverter}}" />
+                <TextBox
+                    Style="{StaticResource FilterTextBoxStyle}"
+                    Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
+                    ToolTip="Filter" />
+            </DockPanel>
+        </DockPanel>
 
     </Grid>
 </Window>

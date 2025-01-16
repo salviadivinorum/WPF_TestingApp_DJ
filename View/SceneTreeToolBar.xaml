@@ -5,9 +5,43 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WPF_TestingApp_DJ.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:WPF_TestingApp_DJ.Model"
+    xmlns:vm="clr-namespace:WPF_TestingApp_DJ.ViewModel"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <model:EmptyStringToVisibilityConverter x:Key="EmptyStringToVisibilityConverter" />
+
+        <Style x:Key="FilterTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Width" Value="auto" />
+            <Setter Property="TextAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="CenterCell" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="TextAlignment" Value="Center" />
+        </Style>
+
+        <DataTemplate x:Key="closeIcon8">
+            <Image
+                Width="16"
+                Height="16"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Source="pack://application:,,,/Resources/close.png" />
+
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <UserControl.DataContext>
+        <vm:MainViewModel />
+    </UserControl.DataContext>
 
     <DockPanel>
         <ToolBar DockPanel.Dock="Left">
@@ -19,11 +53,32 @@
         </ToolBar>
 
         <DockPanel>
-            <Button
+            <!--<Button
                 Content="X"
                 DockPanel.Dock="Right"
+                 Command="{Binding ClearFilterCommand}"
                 Visibility="{Binding IsVisible}" />
-            <TextBox />
+            <TextBox
+                Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"/>-->      
+            
+            
+            <!-- Need to have Button first ! -->
+
+            <Button
+                Width="16"
+                Height="16"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Stretch"
+                Command="{Binding ClearFilterCommand}"
+                ContentTemplate="{StaticResource closeIcon8}"
+                DockPanel.Dock="Right"
+                ToolTip="Clear Filter"
+                Visibility="{Binding FilterText, Converter={StaticResource EmptyStringToVisibilityConverter}}" />
+            <TextBox
+                Style="{StaticResource FilterTextBoxStyle}"
+                Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
+                ToolTip="Filter" />
+
         </DockPanel>
     </DockPanel>
 
